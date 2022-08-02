@@ -26,7 +26,7 @@ export const auth = getAuth()
 export const signInWithGooglePopup = () => signInWithPopup(auth, google_provider)
 export const db = getFirestore()
 
-export const createUserFromAuth = async (userAuth) => {
+export const createUserFromAuth = async (userAuth, additional_information={}) => {
     const userDocRef = doc(db,'users', userAuth.uid)
     console.log(userDocRef)
     const userSnapshot = await getDoc(userDocRef)
@@ -37,7 +37,8 @@ export const createUserFromAuth = async (userAuth) => {
             await setDoc(userDocRef, {
                 displayName,
                 email,
-                createdAt
+                createdAt,
+                ...additional_information
             })
         } catch (error) {
             console.log('Error creating the user ', error.message)   
