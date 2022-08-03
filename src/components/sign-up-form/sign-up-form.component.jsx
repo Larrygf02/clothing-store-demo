@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { createAuthUserWithEmailAndPassword, createUserFromAuth } from "../../utils/firebase/firebase.utils"
+import FormInput from "../form-input/form-input.component"
 
 const defaultFormFields = {
     displayName: '',
@@ -34,7 +35,7 @@ const SignUpForm = () => {
             await createUserFromAuth(user, { displayName })
             resetFormFields()
         } catch(error) {
-            if (error.code == 'auth/email-already-in-use') {
+            if (error.code === 'auth/email-already-in-use') {
                 alert("Cannot create user, email already in use")
             } else {
                 console.log(error)
@@ -46,17 +47,10 @@ const SignUpForm = () => {
         <div>
             <h1>Sign Up with email and password</h1>
             <form onSubmit={handleSubmit}>
-                <label>Display Name</label>
-                <input type="text" required onChange={handleChange} name="displayName" value={displayName}></input>
-
-                <label>Email</label>
-                <input type="email" required onChange={handleChange} name="email" value={email}></input>
-
-                <label>Password</label>
-                <input type="password" required onChange={handleChange} name="password" value={password}></input>
-
-                <label>Confirm Password</label>
-                <input type="password" required onChange={handleChange} name="confirmPassword" value={confirmPassword}></input>
+                <FormInput label="Display Name" type="text" required onChange={handleChange} name="displayName" value={displayName}></FormInput>
+                <FormInput label="Email" type="email" required onChange={handleChange} name="email" value={email}></FormInput>
+                <FormInput label="Password" type="password" required onChange={handleChange} name="password" value={password}></FormInput>
+                <FormInput label="Confirm Password" type="password" required onChange={handleChange} name="confirmPassword" value={confirmPassword}></FormInput>
                 <button type="submit">Sign Up</button>           
             </form>
         </div>
