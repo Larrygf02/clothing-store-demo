@@ -1,6 +1,5 @@
-import { assertClassProperty, assertLiteral } from "@babel/types"
 import { useState } from "react"
-import { createAuthUserWithEmailAndPassword, createUserFromAuth, signInWithGooglePopup, signInAuthUserWithEmailAndPassword } from "../../utils/firebase/firebase.utils"
+import { createUserFromAuth, signInWithGooglePopup, signInAuthUserWithEmailAndPassword } from "../../utils/firebase/firebase.utils"
 import Button from "../button/button.component"
 import FormInput from "../form-input/form-input.component"
 
@@ -50,7 +49,7 @@ const SignInForm = () => {
         <div className="sign-up-container">
             <h2>Already have an account</h2>
             <span>Sign In with email and password</span>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <FormInput label="Email" inputOptions={{'type':"email", 'required':true, 'onChange':handleChange,'name':"email", 'value':email}}></FormInput>
                 <FormInput label="Password" inputOptions={{'type':"password", 'required':true, 'onChange':handleChange,'name':"password", 'value':password}}></FormInput>
                 <div className="buttons-container">
