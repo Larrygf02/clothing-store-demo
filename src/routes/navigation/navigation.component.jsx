@@ -7,11 +7,12 @@ import "./navigation.styles.scss"
 import { signOutUser } from "../../utils/firebase/firebase.utils"
 import CartIcon from "../../components/cart-icon/cart-icon.component"
 import CartDropDown from "../../components/cart-dropdown/cart-dropdown.component"
+import { ToggleShopContext } from "../../contexts/toggle-shop.context"
 
 
 const Navigation = () => {
-    const { currentUser } = useContext(UserContext) 
-    
+    const { currentUser } = (UserContext) 
+    const { currentToggleShop } = useContext(ToggleShopContext)
     return (
       <Fragment>
         <div className="navigation">
@@ -33,7 +34,7 @@ const Navigation = () => {
                 }
                 <CartIcon></CartIcon>
             </div>
-            <CartDropDown></CartDropDown>
+            {currentToggleShop ? <CartDropDown></CartDropDown>: null}
         </div>
         <Outlet></Outlet>
       </Fragment>

@@ -6,14 +6,16 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { UserProvider } from './contexts/user.context';
 import { ProductProvider } from './contexts/product.context';
-
+import { ToogleShopProvider } from './contexts/toggle-shop.context';
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
     <UserProvider>
       <ProductProvider>
-        <App />
+        <ToogleShopProvider>
+          <App />
+        </ToogleShopProvider>
       </ProductProvider>
     </UserProvider>
     </BrowserRouter>
