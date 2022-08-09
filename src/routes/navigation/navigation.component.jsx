@@ -11,7 +11,7 @@ import { ToggleShopContext } from "../../contexts/toggle-shop.context"
 
 
 const Navigation = () => {
-    const { currentUser } = (UserContext) 
+    const { currentUser } = useContext(UserContext) 
     const { currentToggleShop } = useContext(ToggleShopContext)
     return (
       <Fragment>
@@ -34,7 +34,7 @@ const Navigation = () => {
                 }
                 <CartIcon></CartIcon>
             </div>
-            {currentToggleShop ? <CartDropDown></CartDropDown>: null}
+            {currentToggleShop && <CartDropDown></CartDropDown>}
         </div>
         <Outlet></Outlet>
       </Fragment>

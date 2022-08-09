@@ -6,7 +6,6 @@ import { useContext } from 'react'
 const CartIcon = () => {
     const { setCurrentToggleShop, currentToggleShop } = useContext(ToggleShopContext)
     const toggle = () => {
-        console.log(currentToggleShop)
         setCurrentToggleShop(!currentToggleShop)
     }
 
