@@ -9,14 +9,12 @@ export const CartContext = createContext({
 
 export const CartShopProvider = ({children}) => {
     const [currentToggleShop, setCurrentToggleShop ] = useState(false)
-    const [cartItems, setCartItems] = useState([])
+    let [cartItems, setCartItems] = useState([])
 
     const addCarItem = (productToAdd) => {
-        let product_found = cartItems.filter(item => item['id'] === productToAdd['id'])   
-        let index = cartItems.findIndex(item => item['id'] === productToAdd['id'])
-        const is_product_found = product_found.length > 0
-        if (is_product_found) {
-            cartItems[index]['quantity'] += 1
+        let existProduct = cartItems.find(item => item['id'] === productToAdd['id'])
+        if (existProduct) {
+            cartItems = cartItems.map((item) => item['id'] === productToAdd['id'] ? {...item, quantity: item.quantity + 1}: item)
             setCartItems(cartItems)
         } else {
             let item = {...productToAdd, quantity: 1}
