@@ -5,6 +5,7 @@ export const CartContext = createContext({
     setCurrentToggleShop: () => null,
     cartItems: [],
     addCarItem: () => null,
+    removeCartItem: () => null,
     cartCount: 0,
     setCartCount: () => null
 })
@@ -29,9 +30,20 @@ export const CartShopProvider = ({children}) => {
             cartItems.push(item)
             setCartItems(cartItems)
         }
-        console.log(cartItems)
+        // console.log(cartItems)
     }
 
-    const value = { currentToggleShop, setCurrentToggleShop, cartItems, addCarItem, cartCount }
+    const removeCartItem = (productToRemove) => {
+        let product = cartItems.find(item => item['id'] === productToRemove['id'])
+        let quantity = product['quantity']
+        if (quantity == 1) {
+            cartItems = cartItems.filter(cartItem => cartItem['id'] !== productToRemove['id'])
+        } else {    
+            cartItems = cartItems.map(cartItem => cartItem.id === productToRemove.id ? {...cartItem, quantity: cartItem.quantity - 1}: cartItem)
+        }
+        setCartItems(cartItems)
+    }
+
+    const value = { currentToggleShop, setCurrentToggleShop, cartItems, addCarItem, removeCartItem, cartCount }
     return <CartContext.Provider value={value}>{children}</CartContext.Provider>
 }
