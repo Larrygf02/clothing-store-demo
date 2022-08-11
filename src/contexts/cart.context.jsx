@@ -6,6 +6,7 @@ export const CartContext = createContext({
     cartItems: [],
     addCarItem: () => null,
     removeCartItem: () => null,
+    clearCartItem: () => null,
     cartCount: 0,
     setCartCount: () => null
 })
@@ -44,6 +45,11 @@ export const CartShopProvider = ({children}) => {
         setCartItems(cartItems)
     }
 
-    const value = { currentToggleShop, setCurrentToggleShop, cartItems, addCarItem, removeCartItem, cartCount }
+    const clearCartItem = (productToRemove) => {
+        cartItems = cartItems.filter(cartItem => cartItem['id'] !== productToRemove['id'])
+        setCartItems(cartItems)
+    }
+
+    const value = { currentToggleShop, setCurrentToggleShop, cartItems, addCarItem, removeCartItem, clearCartItem, cartCount }
     return <CartContext.Provider value={value}>{children}</CartContext.Provider>
 }
