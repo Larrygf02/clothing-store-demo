@@ -5,8 +5,15 @@ import { getAuth,
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
     signOut,
-    onAuthStateChanged } from 'firebase/auth'
-import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore'
+    onAuthStateChanged
+} from 'firebase/auth'
+import { getFirestore,
+    doc,
+    getDoc,
+    setDoc,
+    collection,
+    writeBatch
+} from 'firebase/firestore'
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_APIKEY,
@@ -31,6 +38,20 @@ export default app
 export const auth = getAuth()
 export const signInWithGooglePopup = () => signInWithPopup(auth, google_provider)
 export const db = getFirestore()
+
+export const addCollectionAndDocuments = async (collectionKey, objectToAdd) => {
+    const collectionRef = collection(db, collectionKey)
+    const batch = writeBatch(db)
+
+    objectToAdd.forEach((object) => {
+        console.log(object)
+        const docRef = doc(collectionRef, object.title.toLowerCase());
+        batch.set(docRef, object)   
+    })
+
+    await batch.commit();
+    console.log('done')
+}
 
 export const createUserFromAuth = async (userAuth, additional_information={}) => {
     const userDocRef = doc(db,'users', userAuth.uid)
