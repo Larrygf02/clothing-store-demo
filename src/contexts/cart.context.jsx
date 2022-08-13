@@ -45,7 +45,7 @@ export const CartShopProvider = ({children}) => {
     const removeCartItem = (productToRemove) => {
         let product = cartItems.find(item => item['id'] === productToRemove['id'])
         let quantity = product['quantity']
-        if (quantity == 1) {
+        if (quantity === 1) {
             cartItems = cartItems.filter(cartItem => cartItem['id'] !== productToRemove['id'])
         } else {    
             cartItems = cartItems.map(cartItem => cartItem.id === productToRemove.id ? {...cartItem, quantity: cartItem.quantity - 1}: cartItem)
