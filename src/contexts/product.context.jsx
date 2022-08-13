@@ -10,6 +10,7 @@ export const ProductContext = createContext({
 })
 
 export const ProductProvider = ({children}) => {
+    // masive process
     /*useEffect(() => {
         addCollectionAndDocuments('categories', SHOP_DATA)
     }, [])*/
