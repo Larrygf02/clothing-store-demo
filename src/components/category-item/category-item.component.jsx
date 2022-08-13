@@ -5,7 +5,6 @@ const CategoryItem = ({ category }) => {
     let navigate = useNavigate()
     const {id, imageUrl, title } = category;
     const navigateToCategory = (category) => {
-        console.log('algo')
         navigate(`shop/${category}`)
     }
 
