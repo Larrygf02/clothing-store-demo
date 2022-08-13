@@ -39,7 +39,6 @@ export const CartShopProvider = ({children}) => {
             cartItems.push(item)
             setCartItems(cartItems)
         }
-        // console.log(cartItems)
     }
 
     const removeCartItem = (productToRemove) => {
