@@ -5,6 +5,7 @@ import { getCategoriesAndDocuments } from "../utils/firebase/firebase.utils.js";
 
 export const ProductContext = createContext({
     currentProducts: [],
+    isLoading: true,
     setCurrentProducts: () => null
 })
 
@@ -12,16 +13,18 @@ export const ProductProvider = ({children}) => {
     /*useEffect(() => {
         addCollectionAndDocuments('categories', SHOP_DATA)
     }, [])*/
+    const [isLoading, setIsLoading] = useState(true)
     const [currentProducts, setCurrentProducts] = useState([])
 
     useEffect(() => {
         const getCategories = async () => {
             const categoryMap = await getCategoriesAndDocuments()
             setCurrentProducts(categoryMap)
+            setIsLoading(false)
             console.log(categoryMap)
         }
         getCategories()
     }, [])
-    const value = { currentProducts, setCurrentProducts }
+    const value = { currentProducts, setCurrentProducts, isLoading }
     return <ProductContext.Provider value={value}>{children}</ProductContext.Provider>
 }
