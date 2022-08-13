@@ -14,7 +14,7 @@ const CategoryPreview = () => {
         if (CATEGORIES.includes(category)) {
             return (
                 <Fragment key={category}>
-                    <h2>{category}</h2>
+                    <h2>{category.toUpperCase()}</h2>
                     <div className="products-container">
                         {currentProducts[category].map((product) => (
                             <ProductCard key={product.id} product={product}></ProductCard>
